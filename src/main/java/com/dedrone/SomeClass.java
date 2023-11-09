@@ -61,7 +61,7 @@ public class SomeClass {
 
 	private static void doSomething3(final int a) {
 
-		System.out.println("== doSomething3 ==");
+		System.out.println('== doSomething3 ==');
 
 		System.out.println(a);
 	}
