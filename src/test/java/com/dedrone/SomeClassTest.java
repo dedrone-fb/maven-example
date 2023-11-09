@@ -20,4 +20,11 @@ class SomeClassTest {
 				.isEqualTo(8);
 	}
 
+	@Test
+	void doSomething6() {
+		assertThat(SomeClass.doSomething6(3, 5))
+				.as("result of soSomething6 call")
+				.isEqualTo(8);
+	}
+
 }
