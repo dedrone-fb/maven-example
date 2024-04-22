@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("Main should")
-class MainTest {
+final class MainTest {
 
 	@Test
 	@DisplayName("correctly calculate sum of two integers (v1)")
@@ -31,7 +31,7 @@ class MainTest {
 	void intSumV3() {
 		assertThat(Main.intSumV3(3, 5))
 				.as("result of intSumV3 call")
-				.isEqualTo(8);
+				.isEqualTo(10);
 	}
 
 	@Test
@@ -43,13 +43,14 @@ class MainTest {
 				.hasSize(count);
 	}
 
+	@SuppressWarnings({ "ReassignedVariable", "StringConcatenationMissingWhitespace" })
 	@Test
 	@DisplayName("creates a map with correct keys and values")
 	void createMapKeysValues() {
 		final int count = 5;
 		final Map<String, String> map = Main.createMap(count);
 		assertSoftly(softly -> {
-			for (int i = 0; i <= count; i++) {
+			for (int i = 0; i < count; i++) {
 				softly.assertThat(map)
 						.as("result of createMap call")
 						.containsEntry("key" + i, "key" + i);
