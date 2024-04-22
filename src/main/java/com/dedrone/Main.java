@@ -2,22 +2,24 @@ package com.dedrone;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
-public class Main {
+@SuppressWarnings({ "SameParameterValue", "UseOfSystemOutOrSystemErr" })
+public final class Main {
 
 	private static final String MAPKEY = "key";
 
 	private enum MyEnum {
-		FOO, BAR, BAZ;
+		FOO, BAR, BAZ
+	}
+
+	private Main() {
 	}
 
 	public static void main(final String[] args) {
 		final MyEnum e = MyEnum.FOO;
 		printEnumHumanReadable(e);
 		printEnumHumanReadableV2(e);
-
-		final Map<String, Integer> myMap = new HashMap<>();
-		printInt(myMap.get(MAPKEY));
 	}
 
 	/**
@@ -46,19 +48,19 @@ public class Main {
 			System.out.println("check 1 - It is not FOO");
 		}
 
-		if (value.toString() == MyEnum.FOO.toString()) {
+		if (Objects.equals(value.toString(), MyEnum.FOO.toString())) {
 			System.out.println("check 2 - It is FOO");
 		} else {
 			System.out.println("check 2 - It is not FOO");
 		}
 
-		if (value.toString() == "FOO") {
+		if (Objects.equals(value.toString(), "FOO")) {
 			System.out.println("check 3 - It is FOO");
 		} else {
 			System.out.println("check 3 - It is not FOO");
 		}
 
-		if (value.toString() == new String("FOO")) {
+		if (Objects.equals(value.toString(), "FOO")) {
 			System.out.println("check 4 - It is FOO");
 		} else {
 			System.out.println("check 4 - It is not FOO");
@@ -67,45 +69,38 @@ public class Main {
 	}
 
 	/**
-	 * Prints the given integer value to the console.
+	 * Calculates the sum of two integers.
 	 *
-	 * @param a The integer value to be printed.
+	 * @param firstInt The first integer.
+	 * @param secondInt The second integer.
+	 * @return The sum of a and b.
 	 */
-	private static void printInt(final int a) {
-		System.out.println(a);
+	static int intSumV1(final int firstInt, final int secondInt) {
+		return firstInt + secondInt;
 	}
 
 	/**
 	 * Calculates the sum of two integers.
 	 *
-	 * @param a The first integer.
-	 * @param b The second integer.
+	 * @param firstInt The first integer.
+	 * @param secondInt The second integer.
 	 * @return The sum of a and b.
 	 */
-	public static int intSumV1(int a, int b) {
-		a + b;
+	@SuppressWarnings({ "AssignmentToMethodParameter", "ValueOfIncrementOrDecrementUsed", "ReassignedVariable", "UnusedAssignment" })
+	static int intSumV2(int firstInt, int secondInt) {
+		return firstInt++ + secondInt++;
 	}
 
 	/**
-	 * Calculates the sum of two integers.
+	 * Calculates the sum of two integers, first incrementing both by 1.
 	 *
-	 * @param a The first integer.
-	 * @param b The second integer.
+	 * @param firstInt The first integer.
+	 * @param secondInt The second integer.
 	 * @return The sum of a and b.
 	 */
-	public static int intSumV2(int a, int b) {
-		a++ + b++;
-	}
-
-	/**
-	 * Calculates the sum of two integers.
-	 *
-	 * @param a The first integer.
-	 * @param b The second integer.
-	 * @return The sum of a and b.
-	 */
-	public static int intSumV3(int a, int b) {
-		++a + ++b;
+	@SuppressWarnings({ "ValueOfIncrementOrDecrementUsed", "AssignmentToMethodParameter", "ReassignedVariable" })
+	static int intSumV3(int firstInt, int secondInt) {
+		return ++firstInt + ++secondInt;
 	}
 
 	/**
@@ -114,7 +109,8 @@ public class Main {
 	 * @param count The number of entries to create in the map.
 	 * @return The map with the specified number of entries.
 	 */
-	public static Map<String, String> createMap(final int count) {
+	@SuppressWarnings({ "ReassignedVariable", "StringConcatenationMissingWhitespace" })
+	static Map<String, String> createMap(final int count) {
 		final Map<String, String> result = new HashMap<>();
 		for (int i = 0; i < count; i++) {
 			result.put(MAPKEY + i, MAPKEY + i);
